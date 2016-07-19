@@ -8,6 +8,10 @@ import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
+import com.lumin824.baidumap.BaiduMapPackage;
+import com.lumin824.chart.ChartPackage;
+import com.lumin824.ezviz.EzvizPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +27,11 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+          new MainReactPackage(),
+          new VectorIconsPackage(),
+          new BaiduMapPackage(),
+          new EzvizPackage(),
+          new ChartPackage()
       );
     }
   };

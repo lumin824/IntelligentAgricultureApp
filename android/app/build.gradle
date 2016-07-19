@@ -93,21 +93,36 @@ android {
         versionCode 1
         versionName "1.0"
         ndk {
-            abiFilters "armeabi-v7a", "x86"
+            abiFilters "armeabi-v7a"
         }
+
     }
     splits {
         abi {
             reset()
             enable enableSeparateBuildPerCPUArchitecture
             universalApk false  // If true, also generate a universal APK
-            include "armeabi-v7a", "x86"
+            include "armeabi-v7a"
+        }
+    }
+    signingConfigs {
+        signing {
+            storeFile file(SIGNING_CONFIG_STORE_FILE)
+            storePassword SIGNING_CONFIG_STORE_PASSWORD
+            keyAlias SIGNING_CONFIG_KEY_ALIAS
+            keyPassword SIGNING_CONFIG_KEY_PASSWORD
         }
     }
     buildTypes {
+        debug {
+            resValue "string", "app_name", APP_NAME
+            signingConfig signingConfigs.signing
+        }
         release {
+            resValue "string", "app_name", APP_NAME
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.signing
         }
     }
     // applicationVariants are e.g. debug, release
@@ -115,7 +130,7 @@ android {
         variant.outputs.each { output ->
             // For each separate APK per architecture, set a unique version code as described here:
             // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
-            def versionCodes = ["armeabi-v7a":1, "x86":2]
+            def versionCodes = ["armeabi-v7a":1]
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
@@ -126,6 +141,10 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-chart')
+    compile project(':react-native-ezviz')
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-baidumap')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules

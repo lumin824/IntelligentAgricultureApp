@@ -1,3 +1,11 @@
 rootProject.name = 'IntelligentAgricultureApp'
 
 include ':app'
+include ':react-native-chart'
+project(':react-native-chart').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-chart/android')
+include ':react-native-ezviz'
+project(':react-native-ezviz').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-ezviz/android')
+include ':react-native-vector-icons'
+project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
+include ':react-native-baidumap'
+project(':react-native-baidumap').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-baidumap/android')
