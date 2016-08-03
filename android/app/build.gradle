@@ -141,6 +141,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-toast')
     compile project(':react-native-chart')
     compile project(':react-native-ezviz')
     compile project(':react-native-vector-icons')

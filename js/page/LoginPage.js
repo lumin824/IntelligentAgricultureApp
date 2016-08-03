@@ -11,17 +11,19 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
+import Toast from 'react-native-toast';
+
 import _find from 'lodash/find';
 
 import action from '../action';
-import { Tip } from '../component';
+import IconFont from '../IconFont';
 
 class P extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      phone: props.phone,
+      username: props.username,
       password: props.password
     };
   }
@@ -35,18 +37,21 @@ class P extends Component {
   }
 
   isDisabledSubmit(){
-    let { phone, password } = this.state;
-    return !phone || !password;
+    let { username, password } = this.state;
+    return !username || !password;
   }
 
   onPressSubmit(){
-    let { phone, password } = this.state;
-    this.props.action.memberLogin({
-      phone, password
+    let { username, password } = this.state;
+    this.props.action.login({
+      username, password
     }).then(action=>{
+
+      //action.error ?
       if(!action.error){ Actions.main() }
       else{
-        this.setState({tip:action.payload.message});
+        Toast.showShortBottom(action.payload);
+
       }
     });
   }
@@ -56,35 +61,47 @@ class P extends Component {
       <View style={{marginTop:100,flex:1}}>
 
         <View style={{alignItems:'center'}}>
-          <Text style={{fontSize:24}}>思源智慧农业</Text>
+          <Image source={require('../../image/logo.png')} style={{height:100}} resizeMode='contain' />
+          <Text style={{fontSize:30}}>思源智慧农业</Text>
         </View>
         <View style={{
             height:45,
             borderWidth:1, borderBottomWidth:0, borderColor:'#888',
+            flexDirection:'row',
             //borderTopLeftRadius:5, borderTopRightRadius:5,
             marginHorizontal:15,marginTop:15
           }}>
-          <TextInput style={{
-              flex:1,
-              marginHorizontal:10,
-              backgroundColor:'transparent'
-            }} onChangeText={phone=>this.setState({phone})} value={this.state.phone} placeholder='请输入手机号' />
+          <View style={{justifyContent:'center', width:45, alignItems:'center', justifyContent:'center'}}>
+            <IconFont name='people' style={{backgroundColor:'transparent'}} size={20} color='#7F7F7F' />
+          </View>
+          <View style={{flex:1, borderLeftWidth:1, borderColor:'#888'}}>
+            <TextInput style={{
+                flex:1,
+
+                backgroundColor:'transparent',
+              }} onChangeText={username=>this.setState({username})} value={this.state.username} placeholder='请输入帐号' />
+          </View>
+
         </View>
 
         <View style={{
             height:45,
             borderWidth:1, borderColor:'#888',
+            flexDirection:'row',
             //borderBottomLeftRadius:5, borderBottomRightRadius:5,
             marginHorizontal:15
           }}>
-          <TextInput style={{
-              flex:1,
-              marginHorizontal:10,
-              backgroundColor:'transparent'
-            }} onChangeText={password=>this.setState({password})} value={this.state.password} placeholder='请输入密码' secureTextEntry={true} />
-        </View>
+          <View style={{justifyContent:'center', width:45, alignItems:'center', justifyContent:'center'}}>
+            <IconFont name='lock' style={{backgroundColor:'transparent'}} size={20} color='#7F7F7F' />
+          </View>
+          <View style={{flex:1, borderLeftWidth:1, borderColor:'#888'}}>
+            <TextInput style={{
+                flex:1,
+                backgroundColor:'transparent'
+              }} onChangeText={password=>this.setState({password})} value={this.state.password} placeholder='请输入密码' secureTextEntry={true} />
+          </View>
 
-        <Tip msg={this.state.tip} />
+        </View>
 
         <TouchableOpacity style={{
             height:45,
@@ -104,6 +121,6 @@ export default connect(
   state=>state.loginForm,
   dispatch=>({
     action: bindActionCreators({
-      memberLogin: action.memberLogin
+      login: action.login
     }, dispatch)})
 )(P);

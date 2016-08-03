@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.facebook.react.ReactActivity;
+import com.remobile.toast.RCTToastPackage;
 import com.lumin824.chart.ChartPackage;
 import com.lumin824.ezviz.EzvizPackage;
 import com.oblador.vectoricons.VectorIconsPackage;

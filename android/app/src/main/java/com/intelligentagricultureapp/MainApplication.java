@@ -12,6 +12,7 @@ import com.lumin824.baidumap.BaiduMapPackage;
 import com.lumin824.chart.ChartPackage;
 import com.lumin824.ezviz.EzvizPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.remobile.toast.RCTToastPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
           new VectorIconsPackage(),
           new BaiduMapPackage(),
           new EzvizPackage(),
-          new ChartPackage()
+          new ChartPackage(),
+          new RCTToastPackage()
       );
     }
   };

@@ -14,6 +14,7 @@
     "react-native-chart": "file:///Users/lumin/GitHub/react-native-chart",
     "react-native-ezviz": "file:///Users/lumin/GitHub/react-native-ezviz",
     "react-native-router-flux": "3.30.8",
+    "react-native-toast": "1.0.1",
     "react-native-vector-icons": "2.0.3",
     "react-redux": "4.4.5",
     "redux": "3.5.2",

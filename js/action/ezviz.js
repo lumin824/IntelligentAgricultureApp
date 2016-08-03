@@ -4,7 +4,7 @@ import * as ezviz from 'react-native-ezviz';
 
 
 setTimeout(()=>{
-  ezviz.setAccessToken('at.7jn7ktdj8q3kqxvce0fz9hbudx2ywjr0-73qmc6gyc2-0ol5ewe-8swk8obfv');
+  ezviz.setAccessToken('at.b3w7wdrr99tvvhmg8h5uvxtm9l7j07p8-9kcv9ngdtl-0gy4qom-0jxsmrtz5');
 },1000);
 
 //export var setAccessToken = createAction('EZVIZ_SET_ACCESS_TOKEN', ezviz.setAccessToken);

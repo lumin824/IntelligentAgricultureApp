@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions';
 
-export var memberLogin = createAction('memberLoginResult', params=>Promise.resolve(params), params=>params);
+export var selectZone = createAction('selectZone');
 
-export var selectPlace = createAction('selectPlace');
+export var selectDevice = createAction('selectDevice');
 
 export var selectData = createAction('selectData');

@@ -9,8 +9,12 @@ const glyphMap = {
   "back": 58880,
   "discover": 58881,
   "settings": 58882,
+  "form": 58895,
+  "footprint": 58899,
   "right": 58883,
+  "home": 58896,
   "discoverfill": 58884,
+  "homefill": 58897,
   "lock": 58885,
   "wifi": 58892,
   "rankfill": 58886,
@@ -19,7 +23,8 @@ const glyphMap = {
   "playfill": 58893,
   "stop": 58894,
   "videofill": 58889,
-  "video": 58890
+  "video": 58890,
+  "formfill": 58898
 };
 
 let IconFont = createIconSet(glyphMap, 'iconfont', 'iconfont.ttf');

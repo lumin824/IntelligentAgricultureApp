@@ -3,10 +3,11 @@ import { createAction } from 'redux-actions';
 import mapValues from 'lodash/mapValues';
 import forEach from 'lodash/forEach';
 
-let httpServer = 'http://localhost:8080/api/v1/';
+let httpServer = 'http://api.ngsyun.com:3000/api/';
 let httpApiList = {
-  'smsCode': {url:'sms-code', jsonBody:true},
-  'memberReg': {url:'member-reg', jsonBody:true},
+  'login': {url:'login', jsonBody:true},
+  'zoneList': {url:'zoneList', jsonBody:true},
+  'deviceList': {url:'deviceList', jsonBody:true},
   //'memberLogin': 'member-login',
   'memberAuth': 'member-auth',
   'memberAuthList': 'member-auth-list',
@@ -17,8 +18,7 @@ let httpApiList = {
 };
 
 let defaultHeader = {
-  'Content-Type':'application/json',
-  'Accept':'application/json'
+  'content-type':'application/json'
 };
 
 var httpActions = mapValues(httpApiList, (actionConfig, actionName) => {
@@ -37,15 +37,15 @@ var httpActions = mapValues(httpApiList, (actionConfig, actionName) => {
         forEach(params, (o, k)=>{ body.append(k,o || '')});
       }
 
-      console.log(body);
-
       let headers = { ...defaultHeader };
       if(actionConfig.headers) headers = {...actionConfig.headers};
 
       return fetch(`${httpServer}${url}`, {body,method:'POST',headers})
-      .then(response=>{console.log(response);return response;})
-      .then(response=>response.status == '200' ? response.text(): Promise.reject(response.json()))
-      .then(text=>{console.log(text);let json = JSON.parse(text); return json;})
+      //.then(response=>{console.log(response);return response;})
+      //.then(response=>response.status == '200' ? response.text(): Promise.reject(response.json()))
+      //.then(text=>{console.log(text);let json = JSON.parse(text); return json;})
+      .then(response=>response.json())
+      .then(json=>json.error ? Promise.reject(json.payload): json.payload)
     }, params=>params
   );
 
@@ -54,6 +54,7 @@ var httpActions = mapValues(httpApiList, (actionConfig, actionName) => {
     return dispatch(resultAction(params));
   }
 });
+
 
 export default {
   ...httpActions
